@@ -67,7 +67,7 @@ class SalesOrder extends AOrder
     /**
      * @var Customer Buyer of this order
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Customer")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Customer", inversedBy="orders")
      * @ORM\JoinColumn(name="customer_id", referencedColumnName="id")
      */
     private $customer;

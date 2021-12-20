@@ -38,7 +38,7 @@ class PurchaseOrder extends AOrder
      * @var Supplier Deliverer of this order
      *
      * @Assert\Valid
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Supplier")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Supplier", inversedBy="orders")
      * @ORM\JoinColumn(name="supplier_id", referencedColumnName="id")
      * @JMS\MaxDepth(depth=1)
      */

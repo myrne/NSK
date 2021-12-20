@@ -89,7 +89,7 @@ class Product
     /**
      * @var ProductType
      *
-     * @ORM\ManyToOne(targetEntity="ProductType")
+     * @ORM\ManyToOne(targetEntity="ProductType", inversedBy="products")
      * @ORM\JoinColumn(name="type_id", referencedColumnName="id")
      */
     private $type;
@@ -164,7 +164,7 @@ class Product
     /**
      * @var Supplier
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Supplier")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Supplier", inversedBy="products")
      * @ORM\JoinColumn(name="owner_id", referencedColumnName="id")
      */
     private $owner;
