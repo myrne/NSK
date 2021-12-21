@@ -9,6 +9,7 @@ services:
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
     app.menubuilder:
         class: AppBundle\Menu\Builder
-     
-
-
+        arguments: ["@knp_menu.factory","@security.authorization_checker","@security.token_storage"]
+        tags:
+            - { name: knp_menu.menu_builder, method: createMainMenu, alias: main }
+            - { name: knp_menu.menu_builder, method: createUserMenu, alias: user }

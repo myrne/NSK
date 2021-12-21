@@ -59,8 +59,8 @@
                 </div>
                 <div class="navbar-collapse collapse" id="mainMenu">
                     {% block navlist %}
-                      {{ knp_menu_render('AppBundle:Builder:createMainMenu', {'currentClass': 'active', 'allow_safe_labels': true}) }}
-                      {{ knp_menu_render('AppBundle:Builder:createUserMenu', {'currentClass': 'active', 'allow_safe_labels': true}) }}
+                      {{ knp_menu_render('main', {'currentClass': 'active', 'allow_safe_labels': true}) }}
+                      {{ knp_menu_render('user', {'currentClass': 'active', 'allow_safe_labels': true}) }}
                     {% endblock %}
                  </div>
             </div>

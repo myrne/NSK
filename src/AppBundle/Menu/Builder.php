@@ -23,19 +23,22 @@
 namespace AppBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class Builder implements ContainerAwareInterface
-{
-    use ContainerAwareTrait;
+class Builder
+{    
+    public function __construct(FactoryInterface $factory, AuthorizationChecker $authorizationChecker, TokenStorageInterface $tokenStorage) {
+      $this->factory = $factory;
+      $this->authorizationChecker = $authorizationChecker;
+      $this->tokenStorage = $tokenStorage;
+    }
 
-    public function createMainMenu(FactoryInterface $factory, array $options)
+    public function createMainMenu(array $options)
     {
-        $role = $this->container->get('security.authorization_checker');
+        $role = $this->authorizationChecker;
 
-        $menu = $factory->createItem('root');
+        $menu = $this->factory->createItem('root');
 
         $menu->setChildrenAttribute('class', 'nav navbar-nav');
 
@@ -63,12 +66,12 @@ class Builder implements ContainerAwareInterface
         return $menu;
     }
 
-    public function createUserMenu(FactoryInterface $factory, array $options)
+    public function createUserMenu(array $options)
     {
-        $role = $this->container->get('security.authorization_checker');
-        $user = $this->container->get('security.token_storage')->getToken()->getUser();
+        $role = $this->authorizationChecker;
+        $user = $this->tokenStorage->getToken()->getUser();
 
-        $menu = $factory->createItem('root');
+        $menu = $this->factory->createItem('root');
 
         $menu->setChildrenAttribute('class', 'nav navbar-nav navbar-right');
 
