@@ -39,9 +39,9 @@
     "prestashop/prestashop-webservice-lib": "dev-master"
   },
   "require-dev": {
-    "sensio/generator-bundle": "^3.0",
     "symfony/phpunit-bridge": "^3.0",
-    "onurb/doctrine-yuml-bundle": "1.1.5"
+    "onurb/doctrine-yuml-bundle": "1.1.5",
+    "symfony/maker-bundle": "1.29"
   },
   "scripts": {
     "symfony-scripts": [
