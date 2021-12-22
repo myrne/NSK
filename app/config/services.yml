@@ -13,3 +13,6 @@ services:
         tags:
             - { name: knp_menu.menu_builder, method: createMainMenu, alias: main }
             - { name: knp_menu.menu_builder, method: createUserMenu, alias: user }
+    AppBundle\Command\:
+        resource: '../../src/AppBundle/Command/*'
+        tags: ['console.command']
