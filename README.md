@@ -100,10 +100,9 @@ Finally make sure the application root can find the source code from its new loc
 ```
 cd ../public_html/nsk
 ```
-You are now in the public root. Open _app.php_ in a text editor and change lines 6 and 7 like so:
+You are now in the public root. Open _app.php_ in a text editor and change line 2 like so:
 ```
-$loader = require __DIR__.'/../../nexxus/app/autoload.php';
-include_once __DIR__.'/../../nexxus/var/bootstrap.php.cache';
+$PROJECT_ROOT = '../../nexxus'
 ```
 Finally, if you are installing an production environment, remove _app_dev.php_. In Linux:
 ```
@@ -120,4 +119,3 @@ When your first visit to Nexxus gives an error 500, our first guess is that the 
 chmod -R 777 var
 ```
 For more information, for example about upgrading installations or the API reference, go to the [Wiki](https://github.com/Nexxus/NSK/wiki).
-

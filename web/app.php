@@ -1,9 +1,9 @@
 <?php
+$PROJECT_ROOT = '..';
 
 use Symfony\Component\HttpFoundation\Request;
 
-/** @var \Composer\Autoload\ClassLoader $loader */
-$loader = require __DIR__.'/../app/autoload.php';
+require $PROJECT_ROOT.'/app/autoload.php';
 
 $kernel = new AppKernel('prod', false);
 
