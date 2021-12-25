@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b34b875a94ed1e6e927bc1d173a3df81",
+    "content-hash": "fe5c4228307d43cbc94a367976aed4b0",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -5896,7 +5896,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "friendsofsymfony/user-bundle": 20,
         "prestashop/prestashop-webservice-lib": 20
     },
     "prefer-stable": false,
