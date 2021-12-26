@@ -177,16 +177,22 @@ class PrestaShopCommand extends ContainerAwareCommand
         $isDebug = gethostname() === "YOGA";
 
         if ($isDebug) {
-            $this->key = "ZA1UJPFTMBGJK7LZIDXB8MQHN7FVXT1K";
-            $this->baseUrl = "http://shop.mediapoints.nl/";   
-            //$this->key = 'ZAZIIVE5M7XC8C22NDTLE7UJ26T9LCIV';
-            //$this->baseUrl = 'http://www.mediapoints.nl/';                  
+          $output->writeln("Debug is activated.");
+          $paramNamePrefix = 'prestashop_debug';
         }
         else {
-            $this->key = 'ZAZIIVE5M7XC8C22NDTLE7UJ26T9LCIV';
-            $this->baseUrl = 'http://www.mediapoints.nl/';
+          $paramNamePrefix = 'prestashop';
         }
+        $paramNameKey = $paramNamePrefix.'_key';
+        $paramNameURL = $paramNamePrefix.'_url';
 
+        $this->key = $this->getContainer()->getParameter($paramNameKey);
+        $this->url = $this->getContainer()->getParameter($paramNameURL);
+
+        $output->writeln("Attempting to update the shop at $this->url ($paramNameURL)");
+        $output->writeln("Using API key $this->key ($paramNameKey)");
+                
+    
         $this->webService = new \PrestaShopWebservice($this->baseUrl, $this->key, $isDebug);
         $this->em = $this->getContainer()->get('doctrine')->getManager(); 
         $productStatusId = $input->getArgument('productStatusIdFilter');
@@ -194,15 +200,13 @@ class PrestaShopCommand extends ContainerAwareCommand
         $this->createResources("categories", $this->em->getRepository(ProductType::class)->findAll());
         $this->createResources("product_features", $this->em->getRepository(Attribute::class)->findBy(['type' => [0,1], 'isPublic' => true]));
         $this->createResources("product_feature_values", $this->em->getRepository(Attribute::class)->findAttributeOptionsForApi());
-
         $products = $this->em->getRepository(Product::class)->findBy(['status' => $productStatusId]);
 
         $this->createResources("products", $products);
         $this->createImages($products);
 
         $this->cleanResources("categories", ProductType::class);
-        $this->cleanResources("product_features", Attribute::class, ['isPublic' => true]);
-        $this->cleanResources("products", Product::class, ['status' => $productStatusId]);
+        $this->cleanResources("product_features", Attribute::class, ['isPublic' => true]);        $this->cleanResources("products", Product::class, ['status' => $productStatusId]);
         $this->cleanResources("images/products", ProductAttributeFile::class);
 
         $this->loadResources("customers", Customer::class);
