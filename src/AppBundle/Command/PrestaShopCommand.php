@@ -189,8 +189,8 @@ class PrestaShopCommand extends ContainerAwareCommand
         $this->key = $this->getContainer()->getParameter($paramNameKey);
         $this->url = $this->getContainer()->getParameter($paramNameURL);
 
-        $output->writeln("Attempting to update the shop at $this->url ($paramNameURL)");
-        $output->writeln("Using API key $this->key ($paramNameKey)");
+        $output->writeln("Attempting to update the shop at $this->url ($paramNameURL).");
+        $output->writeln("Using API key $this->key ($paramNameKey).");
                 
     
         $this->webService = new \PrestaShopWebservice($this->baseUrl, $this->key, $isDebug);
