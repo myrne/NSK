@@ -69,5 +69,10 @@
       "file": "app/config/parameters.yml"
     },
     "branch-alias": null
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/package-versions-deprecated": true
+    }
   }
 }
